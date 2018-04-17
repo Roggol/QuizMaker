@@ -145,6 +145,7 @@ public class GUI extends JFrame implements ActionListener {
 		picLabel.setSize(500, 200);
 		panel.add(picLabel); //adds image
 		 */
+		
 
 		frame.add(panel);//adds panel to frame
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);//maximises frame size
