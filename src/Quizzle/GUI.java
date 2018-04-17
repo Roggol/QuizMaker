@@ -157,8 +157,6 @@ public class GUI extends JFrame implements ActionListener {
 	private void CheckAnswer(String answered, int noOfQuestions, QuestionBank q, String quizName, boolean admin) {
 		boolean end = false;//boolean to check if the quiz has ended
 		boolean correct = q.match(qNumber, answered);
-		System.out.println(""+qNumber);
-		System.out.println(answered);
 		
 		if (correct) {//checks if the char from button pressed and from the file match
 			score++;//if they do increment score

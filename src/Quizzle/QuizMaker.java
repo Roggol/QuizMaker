@@ -81,10 +81,9 @@ public class QuizMaker extends JFrame implements ActionListener {
 					
 				}
 				if (event.getSource()==save){
-					save(q, quizName);
+					save(q, quizName, admin, false);
 				}if(event.getSource()==finish){
-					save(q, quizName);
-					finish(quizName, q, admin);
+					save(q, quizName, admin, true);
 					frame.dispose();
 				}
 
@@ -150,30 +149,49 @@ public class QuizMaker extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void finish(String quizName, QuestionBank q, boolean admin) {
+	protected void finish(String quizName, QuestionBank q, boolean admin, boolean finishBool) {
 		new Startup(quizName, q, admin);
 		
 	}
 
-	protected void save(QuestionBank q, String quizName) {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(quizName + "//questions.dat") );
-			out.writeObject(q);
-			out.close();
-			System.out.println("saved");
-		}catch(IOException e) {
-			e.printStackTrace();
+	protected void save(QuestionBank q, String quizName, boolean admin, boolean finishBool) {
+		boolean validated = true;
+		for(int i=0; i<q.numberOfEntries(); i++) {
+			if(!((q.getAnswer(i).equals("A"))||q.getAnswer(i).equals("B")||q.getAnswer(i).equals("B")||q.getAnswer(i).equals("B"))){
+				int qOut = i+1;
+				JOptionPane.showMessageDialog(null, qOut + " does not have a valid answer");
+				validated = false;
+			}
+		}
+		if(validated){
+			try {
+		
+				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(quizName + "//questions.dat") );
+				out.writeObject(q);
+				out.close();
+				System.out.println("saved");
+				if(finishBool == true) {
+					finish(quizName, q, admin, finishBool);
+				}
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
 
 	protected void back(QuestionBank q) {
-		q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
-		questionNumber --;
+		if(questionNumber>=q.numberOfEntries()) {
+			q.add(questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+		}else {
+			q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+		}
 		if(questionNumber == 1){
 			back.setVisible(false);
 			//to make it so you can't reach negative question numbers
 		}
+		questionNumber --;
+		
 		questionTitle.setText(q.getTitle(questionNumber));
 		AnswerA.setText(q.getAnswerA(questionNumber));
 		AnswerB.setText(q.getAnswerB(questionNumber));
@@ -208,6 +226,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 				Answer.setText(q.getAnswer(questionNumber));
 				Explanation.setText(q.getExplanation(questionNumber));
 				//sets the text to contain the relevant text from the file
+				back.setVisible(true);
 			}else {
 				refresh(10);
 			}
