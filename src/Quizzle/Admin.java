@@ -1,7 +1,7 @@
 package Quizzle;
 
 import java.io.Serializable;
-
+//do not edit
 public class Admin implements Serializable{
 	private String Username;
     private String Password;

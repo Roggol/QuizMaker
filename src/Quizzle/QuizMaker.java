@@ -84,7 +84,6 @@ public class QuizMaker extends JFrame implements ActionListener {
 					save(q, quizName, admin, false);
 				}if(event.getSource()==finish){
 					save(q, quizName, admin, true);
-					frame.dispose();
 				}
 
 			}
@@ -143,6 +142,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 		panel.add(AnswerC);
 		panel.add(AnswerD);
 		panel.add(Answer);
+		panel.add(Explanation);
 		
 		frame.add(panel);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -171,6 +171,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 				out.close();
 				System.out.println("saved");
 				if(finishBool == true) {
+					frame.dispose();
 					finish(quizName, q, admin, finishBool);
 				}
 			}catch(IOException e) {

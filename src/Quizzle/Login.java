@@ -65,11 +65,13 @@ import javax.swing.JTextField;
 			start.setBackground(Color.GRAY);
 			start.setSize(400, 50);
 			start.setLocation(1000, 480);
+			
 			Login.addActionListener(listener);
 			Login.setFocusable(false);
 			Login.setBackground(Color.GRAY);
 			Login.setSize(400, 50);
 			Login.setLocation(1000, 530);
+			
 			admin.addActionListener(listener);
 			admin.setFocusable(false);
 			admin.setBackground(Color.GRAY);

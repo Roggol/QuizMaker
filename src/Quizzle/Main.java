@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 
 public class Main {
+	//do not edit
 	public static void main(String[] args) {//starts program
 		boolean firstLaunch=false;
 		File file = new File("Admins.dat");

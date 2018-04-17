@@ -2,7 +2,7 @@ package Quizzle;
 
 import java.util.Vector;
 import java.io.Serializable;
-
+//do not edit
 public class Admins implements Serializable{
 
 	private Vector<Admin> entries;
