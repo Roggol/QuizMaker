@@ -12,9 +12,12 @@ public class Students implements Serializable{
         entries = new Vector<Student>();
     }
 
-    public void add( String username, String password){
+    /*public void add( String username, String password){
 		entries.add(new Student(username, password));
-    }
+	}*/
+	public void add( String school, String yeargroup){
+	entries.add(new Student(school, yeargroup));
+	}
     public void delete(int index) {
     	entries.remove(index);
     }
@@ -42,7 +45,7 @@ public class Students implements Serializable{
     	for(int i = 0; i< entries.size(); ++i) {
     		if((entries.get(i).getUsername().equalsIgnoreCase(username))&&(entries.get(i).getPassword().equalsIgnoreCase(password))) {
     			found=true;
-    		}		
+    		}
     	}
     	return found;
     }
