@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 public class Main {
 	//do not edit
 	public static void main(String[] args) {//starts program
-		boolean firstLaunch=false;
+		boolean firstLaunch=true;
 		File file = new File("Admins.dat");
 		if(!(file.exists())) {
 			firstLaunch=true;
