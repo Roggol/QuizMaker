@@ -174,6 +174,7 @@ public class GUI extends JFrame implements ActionListener {
 		} else {
 			lastAnswerButton.setBackground(Color.RED);
 			lastAnswerButton.setText(" :(");
+			JOptionPane.showMessageDialog(null, q.getExplanation(qNumber));//give explanation if answer is wrong
 
 		}
 		qNumber++;
