@@ -158,7 +158,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		//create quiz
 		if (admin == true){
 			frame.dispose();
-			new Analytics();
+			//new Analytics(s, quizName, admin, null);
 		}
 	}
 		

@@ -21,7 +21,7 @@ public class Students implements Serializable{
 	public void setScore( int index, int score){
 		entries.get(index).setScore(score);
 	}
-	public void setQuizName( int index, int quizname){
+	public void setQuizName( int index, String quizname){
 		entries.get(index).setQuizName(quizname);
 	}
     public void delete(int index) {
@@ -31,14 +31,7 @@ public class Students implements Serializable{
     	int entryNum=entries.size();
     	return entryNum;
     }
-    public String passwordFor( String name ) {
-        for (int i = 0; i < entries.size(); ++i) {
-            if ( entries.get(i).getUsername().equals(name) ) {
-                return entries.get(i).getPassword();
-            }
-        }
-        return "Student not found.";
-    }
+    
     public String toString( ) {
         StringBuffer temp = new StringBuffer();
         for (int i = 0; i < entries.size(); ++i) {
@@ -46,14 +39,6 @@ public class Students implements Serializable{
         }
         return temp.toString();
     }
-    public boolean foundUser(String username, String password) {
-    	boolean found= false;
-    	for(int i = 0; i< entries.size(); ++i) {
-    		if((entries.get(i).getUsername().equalsIgnoreCase(username))&&(entries.get(i).getPassword().equalsIgnoreCase(password))) {
-    			found=true;
-    		}
-    	}
-    	return found;
-    }
+
 
 }
