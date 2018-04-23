@@ -46,7 +46,4 @@ class Student implements Serializable{
         return username + "," + password;
     }*/
 
-    public boolean equals( Student s ) {
-        return username.equals( s.username ) && password.equals( s.password );
-    }
 }
