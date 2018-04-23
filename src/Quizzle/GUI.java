@@ -22,7 +22,7 @@ public class GUI extends JFrame implements ActionListener {
 
 	JPanel panel; //Panel for the frame
 	JFrame frame; //Frame of the GUI
-	
+
 	JButton greenButton; // Buttons and Labels for the quiz
 	JButton redButton;
 	JButton yellowButton;
@@ -34,7 +34,7 @@ public class GUI extends JFrame implements ActionListener {
 	JButton img_button;
 	JLabel picLabel;
 	private int qNumber = 0; // The intial question number
-	JLabel lastAnswer; 
+	JLabel lastAnswer;
 	JButton lastAnswerButton;
 	String answer; // the answer taken from the text file as a char
 	String buttonPressed; // the answer taken from the button press as a char
@@ -43,9 +43,9 @@ public class GUI extends JFrame implements ActionListener {
 
 
 	public GUI(String quizName, QuestionBank q, int questionNum, boolean admin, Students s, String schools, String year) {
-		
+
 		prepareGUI(); //sets up GUI
-		
+
 		//intitialise buttons and Labels
 		redButton = new JButton("");
 		yellowButton = new JButton("");
@@ -76,12 +76,12 @@ public class GUI extends JFrame implements ActionListener {
 					buttonPressed = "D";
 				}
 				CheckAnswer(buttonPressed, questionNum, q, quizName, admin, s, schools, year); //Runs check answer
-				
+
 
 			}
 
 		};
-		
+
 		//button and Label setup
 		redButton.addActionListener(listener);
 		greenButton.addActionListener(listener);
@@ -124,7 +124,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		g.Font(quizTitle, java.awt.Font.PLAIN); // maximises the text size
 		g.Font(quizQuestion, java.awt.Font.PLAIN); // maximises the text size
-		
+
 		//add buttons and labels
 		panel.add(redButton);
 		panel.add(yellowButton);
@@ -149,7 +149,7 @@ public class GUI extends JFrame implements ActionListener {
 		picLabel.setSize(500, 200);
 		panel.add(picLabel); //adds image
 		 */
-		
+
 
 		frame.add(panel);//adds panel to frame
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);//maximises frame size
@@ -163,29 +163,32 @@ public class GUI extends JFrame implements ActionListener {
 	private void CheckAnswer(String answered, int noOfQuestions, QuestionBank q, String quizName, boolean admin, Students s, String schools, String year) {
 		boolean end = false;//boolean to check if the quiz has ended
 		boolean correct = q.match(qNumber, answered);
-		
+
 		if (correct) {//checks if the char from button pressed and from the file match
 			score++;//if they do increment score
 			scoreTrack.setText("Score: " + score);//update the score Label
 			lastAnswerButton.setBackground(Color.GREEN);
 			lastAnswerButton.setText(" :)");//update the Button to show whether they got the previous answer right
-			
-			
+
+
 		} else {
 			lastAnswerButton.setBackground(Color.RED);
 			lastAnswerButton.setText(" :(");
-			
+
 		}
 		qNumber++;
 		if (qNumber == q.numberOfEntries() ) {//checks to see if the quiz has ended
 			//logScore(username,quizName,score);//logs the score if the quiz is over
 			JOptionPane.showMessageDialog(null, "You scored: " + score + " out of " + noOfQuestions );//tells them their score
 			end = true;//quiz has ended
+			Student s = new Student();
+			s.add(schools, year, quizName,score);
+			s.Save();
 			new Startup(quizName, q, admin, s, schools, year);//goes back to the main menu
 			frame.setVisible(false);
 			frame.dispose();//removes frame
-			
-		
+
+
 		}
 		if (end == false){
 			Prep(quizName, q);	//Sets up boxes again if the quiz has not ended
@@ -226,7 +229,7 @@ public class GUI extends JFrame implements ActionListener {
 					if (highScoreFromFile >= score) {
 						writer1.writeToFile(arrayLines[i]);//if the score from the file is greater than or equal the current score, just re-write the array line
 
-					} else {					
+					} else {
 						writer1.writeToFile(username + "," + score); //current score is greater therefore the old highscore is no longer a high score
 					}
 				} else if (i == 0) {
@@ -237,11 +240,11 @@ public class GUI extends JFrame implements ActionListener {
 				}
 
 			}if (found == false){
-				writer1.writeToFile(username + "," + score); 
+				writer1.writeToFile(username + "," + score);
 				//current score is greater therefore the old highscore is no longer a high score
 			}
 
-			
+
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -251,7 +254,7 @@ public class GUI extends JFrame implements ActionListener {
 	}*/
 
 	private void Prep(String quizName, QuestionBank q) {
-						
+
 			quizQuestion.setText(q.getTitle(qNumber));
 			quizTitle.setText(quizName);
 			redButton.setText("A: " + q.getAnswerA(qNumber));
@@ -259,11 +262,11 @@ public class GUI extends JFrame implements ActionListener {
 			greenButton.setText("C: " + q.getAnswerC(qNumber));
 			blueButton.setText("D: " + q.getAnswerD(qNumber));
 			//sets up Labels and buttons based on data from file
-			
+
 			BufferedImage pic = null;
 			try {
-				qwer = q.getPicString(qNumber); 
-				
+				qwer = q.getPicString(qNumber);
+
 				pic = ImageIO.read(new File(qwer +".png")); //locates image
 				ImageIcon imageIcon = new ImageIcon(pic);
 				picLabel.setIcon(imageIcon);
@@ -275,7 +278,7 @@ public class GUI extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			frame.repaint();// refreshes frame
 
 	}
@@ -294,4 +297,3 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 }
-
