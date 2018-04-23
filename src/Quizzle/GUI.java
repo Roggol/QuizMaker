@@ -181,8 +181,10 @@ public class GUI extends JFrame implements ActionListener {
 		if (qNumber == q.numberOfEntries() ) {//checks to see if the quiz has ended
 			//logScore(username,quizName,score);//logs the score if the quiz is over
 			JOptionPane.showMessageDialog(null, "You scored: " + score + " out of " + noOfQuestions );//tells them their score
+			//s.setScore(index, noOfQuestions);
 			end = true;//quiz has ended
 			s.add(schools, year, quizName,score);
+			System.out.println("Score in GUI: " + score);
 			s.save();
 			new Startup(quizName, q, admin, s, schools, year);//goes back to the main menu
 			frame.setVisible(false);

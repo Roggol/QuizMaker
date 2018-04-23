@@ -9,11 +9,12 @@ class Student implements Serializable{
   private int score;
   private String quizname;
 
-  public Student( String inSchool, String inYeargroup, String quizName, int score) {
+  public Student( String inSchool, String inYeargroup, String quizName, int sc) {
       school = inSchool;
       yeargroup = inYeargroup;
       quizname = quizName; 
-      score = score;
+      score = sc;
+      System.out.println("Score in Student: " + score);
   }
 
   public String getSchool() {

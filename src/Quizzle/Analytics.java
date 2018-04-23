@@ -1,5 +1,4 @@
-package Quizzl;
-import  java.util.ArrayList;
+package Quizzle;
 import java.util.*;
 
 import java.awt.Color;
@@ -52,7 +51,7 @@ public class Analytics extends JFrame implements ActionListener {
 	JButton exit;
 
 
-	public Analytics() {
+	public Analytics(Students s) {
 
 		prepareGUI();
 		ActionListener listener = new ActionListener() {
@@ -70,18 +69,8 @@ public class Analytics extends JFrame implements ActionListener {
 
 		};
 		
-		Students s = new Students ();
-		System.out.println("Getting Students.");
-		for (int i = 0; i < s.numberOfEntries(); i++) {
-			
-			System.out.println(s.getQuizName(i));
-			System.out.println(s.getScore(i));
-			System.out.println(s.getSchool(i));
-			System.out.println(s.getScore(i));
-			
-		}
-		
-		System.out.println("All Students.");
+		//Students s = new Students ();
+
 		
 
 		exit = new JButton("Exit");
@@ -93,7 +82,7 @@ public class Analytics extends JFrame implements ActionListener {
 		int [] startCoordinate = {100,100};
 		String[] headers = new String [10];
 
-		//printQuizTablesToScreen(panel, startCoordinate); 		//this function takes the data from the student file and prints it onto the screen
+		printQuizTablesToScreen(panel, startCoordinate, s); 		//this function takes the data from the student file and prints it onto the screen
 
 		//as I was not able to get data from the file I went about creating demo templates
 		content [0][0] = "Biology";
@@ -120,7 +109,7 @@ public class Analytics extends JFrame implements ActionListener {
 		headers [3] = "Year 11";
 		headers [4] = "Average";
 		
-		createTable("Students Percentage Score Average",headers, content, 175, 25, startCoordinate, panel);
+		//createTable("Students Percentage Score Average",headers, content, 175, 25, startCoordinate, panel);
 		
 		
 		
@@ -151,7 +140,7 @@ public class Analytics extends JFrame implements ActionListener {
 		headers [3] = "Year 11";
 		headers [4] = "Sum";
 		
-		createTable("Amounts Of Students Who Partook In Each Quiz",headers, content, 175, 25, startCoordinate, panel);
+		//createTable("Amounts Of Students Who Partook In Each Quiz",headers, content, 175, 25, startCoordinate, panel);
 		
 		startCoordinate[1] = 500;
 		content [0][0] = "Biology";
@@ -180,7 +169,7 @@ public class Analytics extends JFrame implements ActionListener {
 
 		
 
-		createTable("Schools Average Score Per Quiz",headers, content, 175, 25, startCoordinate, panel);
+		//createTable("Schools Average Score Per Quiz",headers, content, 175, 25, startCoordinate, panel);
 		
 		String[][] stats = new String [10][2];
 		startCoordinate[0] = 1300;
@@ -200,7 +189,7 @@ public class Analytics extends JFrame implements ActionListener {
 		
 				
 		
-		writeStats("Statistics: ", stats, 200, 25, startCoordinate, panel);
+		//writeStats("Statistics: ", stats, 200, 25, startCoordinate, panel);
 		
 		
 		//the above code is example of what the analytics should look like
@@ -289,45 +278,229 @@ public class Analytics extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	public void printQuizTablesToScreen(JPanel panel, int[] startCoordinate){
+	public void printQuizTablesToScreen(JPanel panel, int[] startCoordinate, Students s){
 
 		String[] students = new String[2];
 		ArrayList<String> years = new ArrayList<String>();
 		ArrayList<String> schools = new ArrayList<String>();
+		ArrayList<String> quizs = new ArrayList<String>();
+		
+		int studentAmount = s.numberOfEntries();
+		
+		System.out.println("Amount of Students: " + s.numberOfEntries());
+		
+		ArrayList allStudents = new ArrayList();
+		String [] stu = new String [3];
+		
+		ArrayList<Integer> yearsCount = new ArrayList<Integer>();
+		ArrayList<Integer> schoolsCount = new ArrayList<Integer>();
+		ArrayList<Integer> quizCount = new ArrayList<Integer>();
+		
+		
+		for (int i = 0; i < s.numberOfEntries(); i++) {
+			stu[0] = s.getQuizName(i);
+			System.out.println("Quiz Name:" + s.getQuizName(i));
+			
+			
+			
+			stu[1] = ""+s.getScore(i);
+			System.out.println("Score :" + s.getScore(i));
+			stu[2] = s.getSchool(i);
+			
+			String curQuiz = s.getQuizName(i);
+			if (quizs . contains (curQuiz) == false && (curQuiz != null)){
+				quizs.add(curQuiz);
+				quizCount.add(1);
+			} else {
+				int indexInArray = quizs.indexOf(curQuiz);
+				int toSet = quizCount.get(indexInArray) + 1;
+				
+				quizCount.set(indexInArray, toSet);
+			}
+			
+			
+			if (years . contains (s.getYear(i)) == false && (s.getYear(i) != null)){
+				years.add(s.getYear(i));
+				yearsCount.add(1);
+			} else {
+				int indexInArray = years.indexOf(s.getYear(i));
+				int toSet = yearsCount.get(indexInArray) + 1;
+				
+				yearsCount.set(indexInArray, toSet);
+			}
+			System.out.println("Year:" + s.getYear(i));
+			System.out.println("School:" + s.getSchool(i));
+			if (schools . contains (s.getSchool(i)) == false && (s.getSchool(i) != null)){
+				schools.add(s.getSchool(i));
+				schoolsCount.add(1);
+			} else {
+				int indexInArray = schools.indexOf(s.getSchool(i));
+				int toSet = schoolsCount.get(indexInArray) + 1;
+				
+				schoolsCount.set(indexInArray, toSet);
+			}
+			//schools.add(s.getSchool(i));
+			allStudents.add(stu);
+			
+		}
+		
+		System.out.println("Years: " + years);
+		System.out.println("Schools: " + schools);
+		System.out.println("School Counts: " + schoolsCount);
+		System.out.println("Years Count: " + yearsCount);
+		
+		System.out.println("Quizs: " + quizs);
+		System.out.println("Quiz Counts: " + quizCount);
+		
+		
+		
+		
+		System.out.println("All Students.");
+		
+		int [][] quizScores = new int [quizs.size()][Collections.max(quizCount)];
+		int [] amountOfEntries = new int [quizs.size()];
+		
+		for (int i = 0; i < s.numberOfEntries(); i++) {
+			String qName = s.getQuizName(i);
+			int score = s.getScore(i);
+			
+			quizScores[quizs.indexOf(qName)][amountOfEntries[quizs.indexOf(qName)]] = score; 
+			amountOfEntries[quizs.indexOf(qName)] += 1;
+			
+			
+		}
+		
+		String[][] toPrint = new String [quizs.size()][2];
+		String[][] toPrint2 = new String [quizs.size()][2];
+		
+		for (int i = 0; i < quizScores.length; i++) {
+			
+			System.out.println(Arrays.toString(quizScores[i]));
+			//ArrayList<Integer> b = Arrays.asList(quizScores[i]);
+			
+			
+			List<Integer> b = new ArrayList<Integer>();
+			int sum = 0;
+			for (int k : quizScores[i])
+			{
+			    b.add(k);
+			    sum += k;
+			}
+			
+			
+			
+			//int sum = Collections.sum(b);
+			int topScore = Collections.max(b);
+			int maxScore = topScore * amountOfEntries[i];
+			
+			int averageScore = 0; 
+			
+			if (topScore == 0){
+				averageScore = 0;
+			} else {
+				System.out.println(sum/maxScore);
+				
+				float percent = (sum* 100/maxScore) ;
+				averageScore = Math.round(percent) ;
+			}
+			
+			System.out.println("Top Score: " + topScore);
+			
+			System.out.println("Average Grade: " + averageScore + "%");
+			System.out.println("Sum: " + sum);
+			System.out.println("Max Score: " + maxScore);
+			
+			System.out.println("Quiz: " + quizs.get(i) + " Average Score: " + averageScore + "%");
+			
+			toPrint[i][0] = quizs.get(i);
+			toPrint[i][1] = averageScore + "%";
+			
+			toPrint2[i][0] = quizs.get(i);
+			toPrint2[i][1] = amountOfEntries[i] + "";
+			
+			String[][] stats = new String [10][2];
+			startCoordinate[0] = 1300;
+			startCoordinate[1] = 100;
+			
+			stats[0][0] = "Total Students:";
+			stats[0][1] = studentAmount+"";
+			
+			for (int j =0; j< schools.size(); j++) {
+				System.out.println("J: " + j);
+				stats[j+1][0] = "# of " + schools.get(j) + " students:";
+				stats[j+1][1] = ""+schoolsCount.get(j);
+				
+			}
+			
+			startCoordinate[0] = 800;
+			
+					
+			
+			writeStats("Statistics: ", stats, 200, 25, startCoordinate, panel);
+			
+			
+		}
+		
 
-		schools.add("Quiz 1");
-		schools.add("Quiz 2"); 
-		years.add("DMS");
-		years.add("THS");
-		years.add("CU");
+		
+		
+		
+		String[] ajheez = new String [2]; //adds extra room for average and name
+		ajheez[0] = "Quiz";
 
-		int [][][] schoolsYears = new int[schools.size()][years.size()][students.length]; //holds each [school][year][grades]
+		ajheez[1] = "Average Score";
+		
+		startCoordinate[0] = 100;
+		startCoordinate[1] = 100;
+		
+		createTable("Students Percentage Score Average",ajheez, toPrint, 175, 25, startCoordinate, panel);
+		
+		startCoordinate[0] = 500;
+		ajheez[1] = "Amount";
+		createTable("Amount Of Students Who Entered Each Quiz",ajheez, toPrint2, 175, 25, startCoordinate, panel);
+		
+		System.out.println("^^ Quizs and Scores");
+
+		int [][][] schoolsYears = new int[schools.size()][years.size()][s.numberOfEntries()]; //holds each [school][year][grades]
+		
+		System.out.println("School Years made.");
 
 		java.util.Collections.sort(schools); //sorts them
 		java.util.Collections.sort(years); 
 
-		System.out.println(schools);
-		System.out.println(years);
+		//System.out.println(schools);
+		//System.out.println(years);
+		
+		System.out.println("Lists Sorted.");
 
 		
-		for (int i = 0; i < 1; i++){
+		for (int i = 0; i < studentAmount; i++){
 
 				
-			String currentSchool = "Quiz 1";	//this would be where get student quiz is called
+			String currentQuiz = s.getQuizName(i);	//this would be where get student quiz is called
 
-			String currentYear = "CU"; 			//this would be where get student year is called
+			String currentSchool = (s.getSchool(i)); 			//this would be where get student year is called
 
-			int currentScore = 75;				//this would be where get student score is called
+			int currentScore = s.getScore(i);				//this would be where get student score is called
+			
+			ArrayList<ArrayList<Integer>> yearsScores = new ArrayList<ArrayList<Integer>>();
+			
+			for (int g = 0 ; g < years.size(); g++) {
+				
+				yearsScores.add(allStudents);
+				
+			}
+			
 
 			//puts score into array
 			for (int z = 0; z < students.length; z++){
 				//System.out.println(z);
 				//System.out.println(schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z]);
-				if (schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z] == 0){
-					schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z] = currentScore;
-					System.out.println(schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z]);
-					break;
-				}
+				//if (schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z] == 0){
+					//schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z] = currentScore;
+					//System.out.println(schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z]);
+					//break;
+				//}
 				//System.out.println(schoolsYears[schools.indexOf(currentSchool)][years.indexOf(currentYear)][z]);
 
 
@@ -394,7 +567,7 @@ public class Analytics extends JFrame implements ActionListener {
 			}
 			
 			//puts the students into the tables
-			createTable(title, headers,content,175, 25,startCoordinate,panel);
+			//createTable(title, headers,content,175, 25,startCoordinate,panel);
 		}
 
 	}

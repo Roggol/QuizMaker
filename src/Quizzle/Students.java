@@ -48,6 +48,7 @@ public class Students implements Serializable{
 		entries.add(new Student(username, password));
 	}*/
 	public void add( String school, String yeargroup, String quizName, int score){
+		System.out.println("Score in Students: " + score);
 	entries.add(new Student(school, yeargroup, quizName, score));
 	}
 	public void setScore( int index, int score){

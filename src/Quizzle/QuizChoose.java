@@ -51,7 +51,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 				if (event.getSource() == analytics) {
 					System.out.println("Jheex");
-					viewStats(admin);
+					viewStats(admin, s);
 				}
 
 				if(event.getSource() == oldQuiz){
@@ -155,11 +155,11 @@ public class QuizChoose extends JFrame implements ActionListener {
 		new QuizMaker(quizName,q, admin, s, schools, year);
 	}
 
-	protected void viewStats(boolean admin) {
+	protected void viewStats(boolean admin, Students s) {
 		//create quiz
 		if (admin == true){
 			frame.dispose();
-			//new Analytics(s, quizName, admin, null);
+			new Analytics(s);
 		}
 	}
 
