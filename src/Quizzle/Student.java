@@ -6,11 +6,13 @@ import java.io.Serializable;
 class Student implements Serializable{
   private String school;
   private String yeargroup;
-
+  private int score;
+  private String quizname;
 
   public Student( String inSchool, String inYeargroup) {
       school = inSchool;
       yeargroup = inYeargroup;
+
   }
 
   public String getSchool() {
@@ -18,6 +20,18 @@ class Student implements Serializable{
   }
   public String getYeargroup() {
       return yeargroup;
+  }
+  public int getScore(){
+      return score;
+  }
+  public String getQuizName(){
+      return quizname;
+  }
+  public void setScore(int inScore){
+    score = inScore;
+      }
+  public void setQuizName(String inQuizname){
+    quizname = inQuizname;
   }
 
   public String toString( ) {
@@ -46,4 +60,7 @@ class Student implements Serializable{
         return username + "," + password;
     }*/
 
+    public boolean equals( Student s ) {
+        return username.equals( s.username ) && password.equals( s.password );
+    }
 }
