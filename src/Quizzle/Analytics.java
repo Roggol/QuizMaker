@@ -51,7 +51,7 @@ public class Analytics extends JFrame implements ActionListener {
 	JButton exit;
 
 
-	public Analytics(Students s) {
+	public Analytics(String quizName,QuestionBank q, boolean admin, Students s, String schools, String year) {
 
 		prepareGUI();
 		ActionListener listener = new ActionListener() {
@@ -60,6 +60,7 @@ public class Analytics extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent event) {
 				
 				if(event.getSource()==exit){
+					new Startup(quizName, q, admin, s, schools, year);
 					frame.dispose();
 					
 				}

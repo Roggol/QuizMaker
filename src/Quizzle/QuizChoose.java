@@ -24,7 +24,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JPanel panel;
-	JButton analytics;
 	JButton newQuiz;
 	JButton oldQuiz;
 	JButton back;
@@ -34,7 +33,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 	public QuizChoose(boolean admin, Students s, String schools, String year) {
 		prepareGUI();//setup GUI
-		analytics = new JButton("Analytics");
 		newQuiz = new JButton("New Category");
 		oldQuiz = new JButton("Choose Category");
 		quizMaker = new JTextField("Enter Category Here");
@@ -49,10 +47,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 				}
 
-				if (event.getSource() == analytics) {
-					System.out.println("Jheex");
-					viewStats(admin, s);
-				}
 
 				if(event.getSource() == oldQuiz){
 					// use existing quiz
@@ -93,12 +87,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 		};
 
-		analytics.addActionListener(listener);
-		analytics.setFocusable(false);
-		analytics.setBackground(Color.GRAY);
-		analytics.setSize(200, 50);
-		analytics.setLocation(100, 100);
-
 
 		newQuiz.addActionListener(listener);
 		newQuiz.setFocusable(false);
@@ -125,7 +113,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 		if(admin==true) {
 			panel.add(newQuiz);
 		}
-		panel.add(analytics);
 		panel.add(oldQuiz);
 		panel.add(quizMaker);
 		panel.add(back);
@@ -155,13 +142,6 @@ public class QuizChoose extends JFrame implements ActionListener {
 		new QuizMaker(quizName,q, admin, s, schools, year);
 	}
 
-	protected void viewStats(boolean admin, Students s) {
-		//create quiz
-		if (admin == true){
-			frame.dispose();
-			new Analytics(s);
-		}
-	}
 
 
 	@Override

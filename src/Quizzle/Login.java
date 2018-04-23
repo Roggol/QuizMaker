@@ -87,12 +87,12 @@ import javax.swing.JTextField;
 
 			username.setSize(100, 50);
 			password.setSize(100, 50);
-			username.setLocation(800, 480);
-			password.setLocation(900, 480);
+			username.setLocation(800, 530);
+			password.setLocation(900, 530);
 			school.setSize(100, 50);
 			yeargroup.setSize(100, 50);
-			school.setLocation(800,430);
-			yeargroup.setLocation(900,430);
+			school.setLocation(800,480);
+			yeargroup.setLocation(900,480);
 			panel.setLayout(null);
 			panel.add(start);
 			panel.add(username);

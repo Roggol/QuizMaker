@@ -18,12 +18,14 @@ public class Startup extends JFrame implements ActionListener {
 	JButton start;
 	JButton back;
 	JButton edit;
+	JButton analytics;
 	public Startup(String quizName,QuestionBank q, boolean admin, Students s, String schools, String year) {
 
 		prepareGUI();
 
 		start = new JButton("Start Quiz");
 		edit = new JButton("Edit Quiz");
+		analytics = new JButton("Analytics");
 		ActionListener listener = new ActionListener() {
 
 			@Override
@@ -34,6 +36,10 @@ public class Startup extends JFrame implements ActionListener {
 					frame.dispose();
 					new GUI(quizName,q,questionNum, admin, s, schools, year);
 					//launch quiz
+				}
+				if(event.getSource()== analytics) {
+					new Analytics(quizName, q, admin, s, schools, year);
+					frame.dispose();
 				}
 				if(event.getSource() == back){
 					frame.dispose();
@@ -58,6 +64,12 @@ public class Startup extends JFrame implements ActionListener {
 		start.setBackground(Color.GRAY);
 		start.setSize(100, 50);
 		start.setLocation(840, 480);
+		
+		analytics.addActionListener(listener);
+		analytics.setFocusable(false);
+		analytics.setBackground(Color.GRAY);
+		analytics.setSize(100, 50);
+		analytics.setLocation(840, 530);
 
 		edit.addActionListener(listener);
 		edit.setFocusable(false);
@@ -77,6 +89,7 @@ public class Startup extends JFrame implements ActionListener {
 		panel.add(start);
 		if(admin) {
 			panel.add(edit);
+			panel.add(analytics);
 		}
 		frame.add(panel);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
