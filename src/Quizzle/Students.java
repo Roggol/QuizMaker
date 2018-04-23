@@ -2,6 +2,12 @@ package Quizzle;
 
 
 import java.util.Vector;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Students implements Serializable{
@@ -11,6 +17,32 @@ public class Students implements Serializable{
     public Students( ) {
         entries = new Vector<Student>();
     }
+	public void load() {
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream("entries.dat"));
+			entries = (Vector<Student>)in.readObject();
+			in.close(); 
+		} catch (IOException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	public void save() {
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream("entries.dat") );
+			out.writeObject(entries);
+			out.close(); 
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+	}
 
     /*public void add( String username, String password){
 		entries.add(new Student(username, password));
