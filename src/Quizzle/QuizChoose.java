@@ -45,7 +45,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				if (event.getSource() == newQuiz) {
-					create(admin, s);
+					create(admin, s, schools, year);
 
 				}
 
@@ -134,7 +134,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void create(boolean admin, Students s) {
+	protected void create(boolean admin, Students s, String schools, String year) {
 		//create quiz
 		quizName = quizMaker.getText();
 		File directory = new File(quizName);
@@ -152,7 +152,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		}
 		QuestionBank q = new QuestionBank();
 		frame.dispose();
-		new QuizMaker(quizName,q, admin, s);
+		new QuizMaker(quizName,q, admin, s, schools, year);
 	}
 
 	protected void viewStats(boolean admin) {

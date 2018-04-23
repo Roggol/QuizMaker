@@ -47,8 +47,8 @@ public class Students implements Serializable{
     /*public void add( String username, String password){
 		entries.add(new Student(username, password));
 	}*/
-	public void add( String school, String yeargroup){
-	entries.add(new Student(school, yeargroup));
+	public void add( String school, String yeargroup, String quizName, int score){
+	entries.add(new Student(school, yeargroup, quizName, score));
 	}
 	public void setScore( int index, int score){
 		entries.get(index).setScore(score);
@@ -56,8 +56,17 @@ public class Students implements Serializable{
 	public void setQuizName( int index, String quizname){
 		entries.get(index).setQuizName(quizname);
 	}
-	public int getScore(int index, int score){
-		return entries.get(index).getScore(score);
+	public String getQuizName(int index) {
+		return entries.get(index).getQuizName();
+	}
+	public String getYear(int index) {
+		return entries.get(index).getYeargroup();
+	}
+	public String getSchool(int index) {
+		return entries.get(index).getSchool();
+	}
+	public int getScore(int index){
+		return entries.get(index).getScore();
 	}
     public void delete(int index) {
     	entries.remove(index);

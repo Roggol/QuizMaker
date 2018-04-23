@@ -39,7 +39,7 @@ public class GUI extends JFrame implements ActionListener {
 	int score = 0; //default score
 
 
-	public GUI(String quizName, QuestionBank q, int questionNum, boolean admin, Students s) {
+	public GUI(String quizName, QuestionBank q, int questionNum, boolean admin, Students s, String schools, String year) {
 		
 		prepareGUI(); //sets up GUI
 		
@@ -71,7 +71,7 @@ public class GUI extends JFrame implements ActionListener {
 				if (event.getSource() == blueButton) {
 					buttonPressed = "D";
 				}
-				CheckAnswer(buttonPressed, questionNum, q, quizName, admin, s); //Runs check answer
+				CheckAnswer(buttonPressed, questionNum, q, quizName, admin, s, schools, year); //Runs check answer
 				
 
 			}
@@ -156,7 +156,7 @@ public class GUI extends JFrame implements ActionListener {
 
 	}
 
-	private void CheckAnswer(String answered, int noOfQuestions, QuestionBank q, String quizName, boolean admin, Students s) {
+	private void CheckAnswer(String answered, int noOfQuestions, QuestionBank q, String quizName, boolean admin, Students s, String schools, String year) {
 		boolean end = false;//boolean to check if the quiz has ended
 		boolean correct = q.match(qNumber, answered);
 		
@@ -177,7 +177,7 @@ public class GUI extends JFrame implements ActionListener {
 			//logScore(username,quizName,score);//logs the score if the quiz is over
 			JOptionPane.showMessageDialog(null, "You scored: " + score + " out of " + noOfQuestions );//tells them their score
 			end = true;//quiz has ended
-			new Startup(quizName, q, admin, s);//goes back to the main menu
+			new Startup(quizName, q, admin, s, schools, year);//goes back to the main menu
 			frame.setVisible(false);
 			frame.dispose();//removes frame
 			

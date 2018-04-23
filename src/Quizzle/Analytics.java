@@ -65,7 +65,7 @@ public class Analytics extends JFrame implements ActionListener {
 	private int questionNumber = 0;
 
 
-	public Analytics(Students s, String quiz, boolean Admin, QuestionBank q) {
+	public Analytics(Students s, String quiz, boolean Admin, QuestionBank q, String Schools, String year) {
 
 		prepareGUI();
 
@@ -80,7 +80,7 @@ public class Analytics extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent event) {
 				
 				if(event.getSource()==exit){
-					new Startup(quiz, q, Admin, s);
+					new Startup(quiz, q, Admin, s, Schools, year);
 					frame.dispose();
 					
 				}

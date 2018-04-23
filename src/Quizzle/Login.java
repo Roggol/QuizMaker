@@ -28,8 +28,8 @@ import javax.swing.JTextField;
 		JTextField yeargroup;
 		String usernameCheck;
 		String passwordCheck;
-		String year;
-		String schools;
+		String year = "";
+		String schools = "";
 		JButton Login;
 		JButton admin;
 
@@ -127,7 +127,7 @@ import javax.swing.JTextField;
 			frame.dispose();
 			Students s = new Students();
 			s.load();
-			new QuizChoose(true, s);
+			new QuizChoose(true, s, schools, year);
 
 
 		}
@@ -151,7 +151,7 @@ import javax.swing.JTextField;
 
 			if(passwordCheck.equals(a.PasswordFor(usernameCheck))) {
 				frame.dispose();
-				new QuizChoose(true, s);
+				new QuizChoose(true, s, schools, year);
 
 			}else {
 				JOptionPane.showMessageDialog(null, "Username or password does not match" );

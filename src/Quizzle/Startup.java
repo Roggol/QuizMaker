@@ -37,13 +37,13 @@ public class Startup extends JFrame implements ActionListener {
 				}
 				if(event.getSource() == back){
 					frame.dispose();
-					new QuizChoose(admin, s);
+					new QuizChoose(admin, s, schools, year);
 					//launch choose quiz screen
 					//delete frame
 
 				}if (event.getSource() == edit) {
 
-					new QuizMaker(quizName,q, admin, s);
+					new QuizMaker(quizName,q, admin, s, schools, year);
 					//launch quiz maker screen
 					frame.setVisible(false);
 					frame.dispose();
