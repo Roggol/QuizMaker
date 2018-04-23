@@ -24,6 +24,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JPanel panel;
+	JButton analytics;
 	JButton newQuiz;
 	JButton oldQuiz;
 	JButton back;
@@ -31,9 +32,9 @@ public class QuizChoose extends JFrame implements ActionListener {
 	String quizName;
 	//initialise objects
 
-	public QuizChoose(boolean admin) {
+	public QuizChoose(boolean admin, Students s) {
 		prepareGUI();//setup GUI
-
+		analytics = new JButton("Analytics");
 		newQuiz = new JButton("New Category");
 		oldQuiz = new JButton("Choose Category");
 		quizMaker = new JTextField("Enter Category Here");
@@ -44,9 +45,15 @@ public class QuizChoose extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				if (event.getSource() == newQuiz) {
-					create(admin);
+					create(admin, s);
 					
 				}
+				
+				if (event.getSource() == analytics) {
+					System.out.println("Jheex");
+					viewStats(admin);
+				}
+				
 				if(event.getSource() == oldQuiz){
 					// use existing quiz
 					quizName = quizMaker.getText();
@@ -62,7 +69,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 				            e.printStackTrace();
 				        }
 						//checks to see if directory exists
-						new Startup(quizName,q,admin);
+						new Startup(quizName,q,admin, s);
 						//launches main menu
 						frame.setVisible(false);
 						frame.dispose();
@@ -84,6 +91,14 @@ public class QuizChoose extends JFrame implements ActionListener {
 			}
 
 		};
+		
+		analytics.addActionListener(listener);
+		analytics.setFocusable(false);
+		analytics.setBackground(Color.GRAY);
+		analytics.setSize(200, 50);
+		analytics.setLocation(100, 100);
+		
+		
 		newQuiz.addActionListener(listener);
 		newQuiz.setFocusable(false);
 		newQuiz.setBackground(Color.GRAY);
@@ -109,6 +124,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		if(admin==true) {
 			panel.add(newQuiz);
 		}
+		panel.add(analytics);
 		panel.add(oldQuiz);
 		panel.add(quizMaker);
 		panel.add(back);
@@ -117,7 +133,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void create(boolean admin) {
+	protected void create(boolean admin, Students s) {
 		//create quiz
 		quizName = quizMaker.getText();
 		File directory = new File(quizName);
@@ -135,7 +151,15 @@ public class QuizChoose extends JFrame implements ActionListener {
 		}
 		QuestionBank q = new QuestionBank();
 		frame.dispose();
-		new QuizMaker(quizName,q, admin);
+		new QuizMaker(quizName,q, admin, s);
+	}
+	
+	protected void viewStats(boolean admin) {
+		//create quiz
+		if (admin == true){
+			frame.dispose();
+			//new Analytics(s, quizName, admin, null);
+		}
 	}
 		
 

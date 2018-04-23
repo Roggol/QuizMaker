@@ -24,11 +24,13 @@ import javax.swing.JTextField;
 		JButton start;
 		JTextField username;
 		JTextField password;
+		JTextField school;
+		JTextField yeargroup;
 		String usernameCheck;
 		String passwordCheck;
 		JButton Login;
 		JButton admin;
-		
+
 		//Initialise buttons, strings, integers and Labels
 
 		public Login(boolean firstLaunch) {
@@ -39,6 +41,8 @@ import javax.swing.JTextField;
 			Login = new JButton("Login as Admin");
 			username = new JTextField("UserName");
 			password = new JTextField("Password");
+			school = new JTextField("School");
+			yeargroup = new JTextField("Yeargroup");
 			admin = new JButton("Create Admin");
 			//sets up buttons and Text fields
 			ActionListener listener = new ActionListener() {
@@ -55,38 +59,44 @@ import javax.swing.JTextField;
 					if(event.getSource()==admin) {
 						createAdmin();
 					}
-					
+
 				}
 			};
-			
+
 			//objects setup
 			start.addActionListener(listener);
 			start.setFocusable(false);
 			start.setBackground(Color.GRAY);
 			start.setSize(400, 50);
 			start.setLocation(1000, 480);
-			
+
 			Login.addActionListener(listener);
 			Login.setFocusable(false);
 			Login.setBackground(Color.GRAY);
 			Login.setSize(400, 50);
 			Login.setLocation(1000, 530);
-			
+
 			admin.addActionListener(listener);
 			admin.setFocusable(false);
 			admin.setBackground(Color.GRAY);
 			admin.setSize(400, 50);
 			admin.setLocation(1000, 530);
-				
+
 
 			username.setSize(100, 50);
 			password.setSize(100, 50);
 			username.setLocation(800, 480);
 			password.setLocation(900, 480);
+			school.setSize(100, 50);
+			yeargroup.setSize(100, 50);
+			school.setLocation(800,430);
+			yeargroup.setLocation(900,430);
 			panel.setLayout(null);
 			panel.add(start);
 			panel.add(username);
 			panel.add(password);
+			panel.add(school);
+			panel.add(yeargroup);
 			if(firstLaunch==true) {
 				panel.add(admin);
 			}else {
@@ -113,9 +123,11 @@ import javax.swing.JTextField;
 				e.printStackTrace();
 			}
 			frame.dispose();
-			new QuizChoose(true);
+			Students s = new Students();
+			s.load();
+			new QuizChoose(true, s);
 
-			
+
 		}
 
 		protected void signup() {
@@ -132,19 +144,20 @@ import javax.swing.JTextField;
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
+			Students s = new Students();
+			s.load();
+
 			if(passwordCheck.equals(a.PasswordFor(usernameCheck))) {
 				frame.dispose();
-				new QuizChoose(true);
-				
+				new QuizChoose(true, s);
+
 			}else {
 				JOptionPane.showMessageDialog(null, "Username or password does not match" );
-				
+
 			}
-		
+
 		}
-			
+
 
 		protected void goToMenu() {
 			Admins a = new Admins();
@@ -156,10 +169,12 @@ import javax.swing.JTextField;
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+			Students s = new Students();
+			s.load();
 			frame.dispose();
-			new QuizChoose(false);
+			new QuizChoose(false, s);
 		}
-			
+
 
 		private void prepareGUI() {
 			//sets up GUI
