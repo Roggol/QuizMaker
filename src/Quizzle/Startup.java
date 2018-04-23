@@ -18,7 +18,7 @@ public class Startup extends JFrame implements ActionListener {
 	JButton start;
 	JButton back;
 	JButton edit;
-	public Startup(String quizName,QuestionBank q, boolean admin, Students s) {
+	public Startup(String quizName,QuestionBank q, boolean admin, Students s, String schools, String year) {
 
 		prepareGUI();
 
@@ -32,7 +32,7 @@ public class Startup extends JFrame implements ActionListener {
 					//Start button pressed
 					int questionNum = q.numberOfEntries();
 					frame.dispose();
-					new GUI(quizName,q,questionNum, admin, s);
+					new GUI(quizName,q,questionNum, admin, s, schools, year);
 					//launch quiz
 				}
 				if(event.getSource() == back){
@@ -40,9 +40,9 @@ public class Startup extends JFrame implements ActionListener {
 					new QuizChoose(admin, s);
 					//launch choose quiz screen
 					//delete frame
-					
+
 				}if (event.getSource() == edit) {
-					
+
 					new QuizMaker(quizName,q, admin, s);
 					//launch quiz maker screen
 					frame.setVisible(false);
@@ -58,20 +58,20 @@ public class Startup extends JFrame implements ActionListener {
 		start.setBackground(Color.GRAY);
 		start.setSize(100, 50);
 		start.setLocation(840, 480);
-		
+
 		edit.addActionListener(listener);
 		edit.setFocusable(false);
 		edit.setBackground(Color.GRAY);
 		edit.setSize(100, 50);
 		edit.setLocation(840, 580);
-		
+
 		back = new JButton("Back");
 		back.addActionListener(listener);
 		back.setFocusable(false);
 		back.setBackground(Color.GRAY);
 		back.setSize(100, 50);
 		back.setLocation(840, 630);
-		
+
 		panel.setLayout(null);
 		panel.add(back);
 		panel.add(start);

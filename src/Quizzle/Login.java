@@ -28,6 +28,8 @@ import javax.swing.JTextField;
 		JTextField yeargroup;
 		String usernameCheck;
 		String passwordCheck;
+		String year;
+		String schools;
 		JButton Login;
 		JButton admin;
 
@@ -169,10 +171,12 @@ import javax.swing.JTextField;
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+			schools = school.getText();
+			year = yeargroup.getText();
 			Students s = new Students();
 			s.load();
 			frame.dispose();
-			new QuizChoose(false, s);
+			new QuizChoose(false, s, schools, year);
 		}
 
 
