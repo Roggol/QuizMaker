@@ -22,25 +22,25 @@ public class Students implements Serializable{
 		try {
 			in = new ObjectInputStream(new FileInputStream("entries.dat"));
 			entries = (Vector<Student>)in.readObject();
-			in.close(); 
+			in.close();
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 	public void save() {
 		ObjectOutputStream out;
 		try {
 			out = new ObjectOutputStream(new FileOutputStream("entries.dat") );
 			out.writeObject(entries);
-			out.close(); 
+			out.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 
 	}
 
@@ -56,6 +56,9 @@ public class Students implements Serializable{
 	public void setQuizName( int index, String quizname){
 		entries.get(index).setQuizName(quizname);
 	}
+	public int getScore(int index, int score){
+		return entries.get(index).getScore(score);
+	}
     public void delete(int index) {
     	entries.remove(index);
     }
@@ -63,7 +66,7 @@ public class Students implements Serializable{
     	int entryNum=entries.size();
     	return entryNum;
     }
-    
+
     public String toString( ) {
         StringBuffer temp = new StringBuffer();
         for (int i = 0; i < entries.size(); ++i) {
