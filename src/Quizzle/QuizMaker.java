@@ -39,7 +39,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 	private int questionNumber = 0;
 
 
-	public QuizMaker(final String quizName, QuestionBank q, boolean admin) {
+	public QuizMaker(final String quizName, QuestionBank q, boolean admin, Students s) {
 
 		prepareGUI();
 		next = new JButton("next -->");
@@ -81,9 +81,9 @@ public class QuizMaker extends JFrame implements ActionListener {
 					
 				}
 				if (event.getSource()==save){
-					save(q, quizName, admin, false);
+					save(q, quizName, admin, false, s);
 				}if(event.getSource()==finish){
-					save(q, quizName, admin, true);
+					save(q, quizName, admin, true, s);
 				}
 
 			}
@@ -149,12 +149,12 @@ public class QuizMaker extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void finish(String quizName, QuestionBank q, boolean admin, boolean finishBool) {
-		new Startup(quizName, q, admin);
+	protected void finish(String quizName, QuestionBank q, boolean admin, boolean finishBool, Students s) {
+		new Startup(quizName, q, admin, s);
 		
 	}
 
-	protected void save(QuestionBank q, String quizName, boolean admin, boolean finishBool) {
+	protected void save(QuestionBank q, String quizName, boolean admin, boolean finishBool, Students s) {
 		boolean validated = true;
 		for(int i=0; i<q.numberOfEntries(); i++) {
 			if(!((q.getAnswer(i).equals("A"))||q.getAnswer(i).equals("B")||q.getAnswer(i).equals("B")||q.getAnswer(i).equals("B"))){
@@ -172,7 +172,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 				System.out.println("saved");
 				if(finishBool == true) {
 					frame.dispose();
-					finish(quizName, q, admin, finishBool);
+					finish(quizName, q, admin, finishBool, s);
 				}
 			}catch(IOException e) {
 				e.printStackTrace();

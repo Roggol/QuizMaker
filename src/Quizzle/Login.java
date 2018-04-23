@@ -123,7 +123,9 @@ import javax.swing.JTextField;
 				e.printStackTrace();
 			}
 			frame.dispose();
-			new QuizChoose(true);
+			Students s = new Students();
+			s.load();
+			new QuizChoose(true, s);
 
 
 		}
@@ -142,11 +144,12 @@ import javax.swing.JTextField;
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			Students s = new Students();
+			s.load();
 
 			if(passwordCheck.equals(a.PasswordFor(usernameCheck))) {
 				frame.dispose();
-				new QuizChoose(true);
+				new QuizChoose(true, s);
 
 			}else {
 				JOptionPane.showMessageDialog(null, "Username or password does not match" );
@@ -166,8 +169,10 @@ import javax.swing.JTextField;
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+			Students s = new Students();
+			s.load();
 			frame.dispose();
-			new QuizChoose(false);
+			new QuizChoose(false, s);
 		}
 
 

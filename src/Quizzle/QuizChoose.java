@@ -32,7 +32,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 	String quizName;
 	//initialise objects
 
-	public QuizChoose(boolean admin) {
+	public QuizChoose(boolean admin, Students s) {
 		prepareGUI();//setup GUI
 		analytics = new JButton("Analytics");
 		newQuiz = new JButton("New Category");
@@ -45,7 +45,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				if (event.getSource() == newQuiz) {
-					create(admin);
+					create(admin, s);
 					
 				}
 				
@@ -69,7 +69,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 				            e.printStackTrace();
 				        }
 						//checks to see if directory exists
-						new Startup(quizName,q,admin);
+						new Startup(quizName,q,admin, s);
 						//launches main menu
 						frame.setVisible(false);
 						frame.dispose();
@@ -133,7 +133,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	protected void create(boolean admin) {
+	protected void create(boolean admin, Students s) {
 		//create quiz
 		quizName = quizMaker.getText();
 		File directory = new File(quizName);
@@ -151,7 +151,7 @@ public class QuizChoose extends JFrame implements ActionListener {
 		}
 		QuestionBank q = new QuestionBank();
 		frame.dispose();
-		new QuizMaker(quizName,q, admin);
+		new QuizMaker(quizName,q, admin, s);
 	}
 	
 	protected void viewStats(boolean admin) {
