@@ -31,12 +31,15 @@ public class GUI extends JFrame implements ActionListener {
 	JLabel quizQuestion;
 	JLabel Quizzle;
 	JLabel scoreTrack;
+	JButton img_button;
+	JLabel picLabel;
 	private int qNumber = 0; // The intial question number
 	JLabel lastAnswer; 
 	JButton lastAnswerButton;
 	String answer; // the answer taken from the text file as a char
 	String buttonPressed; // the answer taken from the button press as a char
 	int score = 0; //default score
+	String qwer = "";
 
 
 	public GUI(String quizName, QuestionBank q, int questionNum, boolean admin, Students s, String schools, String year) {
@@ -53,6 +56,7 @@ public class GUI extends JFrame implements ActionListener {
 		scoreTrack = new JLabel("Score: " + score);
 		lastAnswer = new JLabel("Last answer:");
 		lastAnswerButton = new JButton("");
+		picLabel = new JLabel(""); //creates Label for image
 
 		ActionListener listener = new ActionListener() {
 
@@ -255,7 +259,23 @@ public class GUI extends JFrame implements ActionListener {
 			greenButton.setText("C: " + q.getAnswerC(qNumber));
 			blueButton.setText("D: " + q.getAnswerD(qNumber));
 			//sets up Labels and buttons based on data from file
-
+			
+			BufferedImage pic = null;
+			try {
+				qwer = q.getPicString(qNumber); 
+				
+				pic = ImageIO.read(new File(qwer +".png")); //locates image
+				ImageIcon imageIcon = new ImageIcon(pic);
+				picLabel.setIcon(imageIcon);
+				picLabel.setLocation(1150, 50);
+				picLabel.setSize(500, 300);
+				validate();
+				panel.add(picLabel); //adds image
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			frame.repaint();// refreshes frame
 
 	}

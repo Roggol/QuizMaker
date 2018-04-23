@@ -20,7 +20,7 @@ public class Students implements Serializable{
 	public void load() {
 		ObjectInputStream in;
 		try {
-			in = new ObjectInputStream(new FileInputStream("entries.dat"));
+			in = new ObjectInputStream(new FileInputStream("Students.dat"));
 			entries = (Vector<Student>)in.readObject();
 			in.close();
 		} catch (IOException | ClassNotFoundException e) {
@@ -31,7 +31,7 @@ public class Students implements Serializable{
 	public void save() {
 		ObjectOutputStream out;
 		try {
-			out = new ObjectOutputStream(new FileOutputStream("entries.dat") );
+			out = new ObjectOutputStream(new FileOutputStream("Students.dat") );
 			out.writeObject(entries);
 			out.close();
 		} catch (FileNotFoundException e) {

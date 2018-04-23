@@ -12,9 +12,10 @@ class Question implements Serializable{
     private String answerD;
     private String correctAnswer;
     private String explanation;
+    private String picString;
     
 
-    public Question( String title, String AnswerA, String AnswerB, String AnswerC, String AnswerD, String answer, String explanationQ ) {
+    public Question( String title, String AnswerA, String AnswerB, String AnswerC, String AnswerD, String answer, String explanationQ, String picStringQ ) {
         questionTitle = title;
         answerA = AnswerA;
         answerB = AnswerB;
@@ -22,6 +23,7 @@ class Question implements Serializable{
         answerD = AnswerD;
         correctAnswer = answer;
         explanation = explanationQ;
+        picString = picStringQ;
     }
 
     public String getTitle() {
@@ -65,6 +67,12 @@ class Question implements Serializable{
     }
     public String getExplanation() {
     	return explanation;
+    }
+    public void setPicString(String pic_String) {		//added
+    	picString = pic_String;		
+    }
+    public String getPicString() {						//added
+    	return picString;
     }
     public String toString( ) {
         return questionTitle + "," + answerA + "," + answerB + "," + answerC + ","+ answerD + "," + correctAnswer;

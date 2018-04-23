@@ -35,6 +35,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 	JTextField AnswerD;
 	JTextField Answer;
 	JTextField Explanation;
+	JTextField PicString;	//added
 	
 	private int questionNumber = 0;
 
@@ -54,6 +55,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 		AnswerD = new JTextField ("D: ");
 		Answer = new JTextField ("Correct Answer (A,B,C or D)");
 		Explanation = new JTextField("Explanation");
+		PicString = new JTextField("PicString number");	//added
 		
 		if (!(questionNumber >= q.numberOfEntries())){
 			//if the question already exists in the file, print what is saved for that question
@@ -65,6 +67,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 			AnswerD.setText(q.getAnswerD(questionNumber));
 			Answer.setText(q.getAnswer(questionNumber));
 			Explanation.setText(q.getExplanation(questionNumber));
+			PicString.setText(q.getPicString(questionNumber));	//added
 			//sets the text to contain the relevant text from the file
 		}
 
@@ -130,6 +133,8 @@ public class QuizMaker extends JFrame implements ActionListener {
 		Answer.setLocation(1000, 600);	
 		Explanation.setSize(1000,50);
 		Explanation.setLocation(1000,700);
+		PicString.setSize(1000,50);		//added
+		PicString.setLocation(1000,800);	//added
 		
 		panel.setLayout(null);
 		panel.add(next);
@@ -143,6 +148,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 		panel.add(AnswerD);
 		panel.add(Answer);
 		panel.add(Explanation);
+		panel.add(PicString);	//added
 		
 		frame.add(panel);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -183,9 +189,9 @@ public class QuizMaker extends JFrame implements ActionListener {
 
 	protected void back(QuestionBank q) {
 		if(questionNumber>=q.numberOfEntries()) {
-			q.add(questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+			q.add(questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText(), PicString.getText());
 		}else {
-			q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+			q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText(), PicString.getText());
 		}
 		if(questionNumber == 1){
 			back.setVisible(false);
@@ -200,6 +206,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 		AnswerD.setText(q.getAnswerD(questionNumber));
 		Answer.setText(q.getAnswer(questionNumber));
 		Explanation.setText(q.getExplanation(questionNumber));
+		PicString.setText(q.getPicString(questionNumber));	//added
 		
 	}
 
@@ -209,9 +216,9 @@ public class QuizMaker extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Not a valid Answer");
 		}else{
 			if(questionNumber>=q.numberOfEntries()) {
-				q.add(questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+				q.add(questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText(), PicString.getText());
 			}else {
-				q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText());
+				q.replace(questionNumber,questionTitle.getText(), AnswerA.getText(), AnswerB.getText(), AnswerC.getText(), AnswerD.getText(), Answer.getText(), Explanation.getText(), PicString.getText());
 			}
 			
 			questionNumber++;
@@ -225,6 +232,7 @@ public class QuizMaker extends JFrame implements ActionListener {
 				AnswerC.setText(q.getAnswerC(questionNumber));
 				AnswerD.setText(q.getAnswerD(questionNumber));
 				Answer.setText(q.getAnswer(questionNumber));
+				PicString.setText(q.getPicString(questionNumber));
 				Explanation.setText(q.getExplanation(questionNumber));
 				//sets the text to contain the relevant text from the file
 				back.setVisible(true);
