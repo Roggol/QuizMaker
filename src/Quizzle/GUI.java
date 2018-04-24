@@ -183,11 +183,13 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "You scored: " + score + " out of " + noOfQuestions );//tells them their score
 			//s.setScore(index, noOfQuestions);
 			end = true;//quiz has ended
-			if(admin = false) {
+			System.out.println(""+ admin);
+			if(admin == false) {
 				s.add(schools, year, quizName,score);
 			}
 			System.out.println("Score in GUI: " + score);
 			s.save();
+			System.out.println(""+s);
 			new Startup(quizName, q, admin, s, schools, year);//goes back to the main menu
 			frame.setVisible(false);
 			frame.dispose();//removes frame

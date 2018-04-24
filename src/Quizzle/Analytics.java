@@ -52,7 +52,7 @@ public class Analytics extends JFrame implements ActionListener {
 
 
 	public Analytics(String quizName,QuestionBank q, boolean admin, Students s, String schools, String year) {
-
+		System.out.println(""+s);
 		prepareGUI();
 		ActionListener listener = new ActionListener() {
 			
